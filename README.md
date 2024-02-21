@@ -1,0 +1,1 @@
+# Design Patterns in Go - Go-Breeders remote service
