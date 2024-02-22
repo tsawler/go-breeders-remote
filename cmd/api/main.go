@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"go-breeders/configuration"
+	"go-breeders-remote/configuration"
 	"log"
 	"net/http"
 	"time"

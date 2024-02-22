@@ -1,4 +1,4 @@
-module go-breeders
+module go-breeders-remote
 
 go 1.20
 

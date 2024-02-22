@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/tsawler/toolbox"
-	"go-breeders/models"
+	"go-breeders-remote/models"
 	"net/http"
 )
 
