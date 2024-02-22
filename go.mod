@@ -8,7 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/jackc/pgconn v1.14.1
 	github.com/jackc/pgx/v5 v5.5.3
-	github.com/tsawler/toolbox v1.1.7
+	github.com/tsawler/toolbox v1.3.1
 )
 
 require (

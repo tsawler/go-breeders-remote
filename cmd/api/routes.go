@@ -18,5 +18,8 @@ func (app *application) routes() http.Handler {
 		MaxAge:           300, // Maximum value not ignored by any of major browsers
 	}))
 
+	mux.Get("/api/cat-breeds/all/json", app.GetAllCatsJSON)
+	mux.Get("/api/cat-breeds/all/xml", app.GetAllCatsXML)
+
 	return mux
 }
