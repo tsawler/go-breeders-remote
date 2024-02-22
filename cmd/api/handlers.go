@@ -6,23 +6,26 @@ import (
 	"net/http"
 )
 
-type Cat struct {
-	Breed string `json:"breed"`
-}
-
+// GetAllCatsJSON gets a list of all cat breeds from the database and returns it as JSON.
 func (app *application) GetAllCatsJSON(w http.ResponseWriter, r *http.Request) {
 	var t toolbox.Tools
-	dogBreeds, err := app.App.Models.CatBreed.All()
+
+	// Get all cat breeds from the database.
+	catBreeds, err := app.App.Models.CatBreed.All()
 	if err != nil {
 		_ = t.ErrorJSON(w, err, http.StatusBadRequest)
 		return
 	}
 
-	_ = t.WriteJSON(w, http.StatusOK, dogBreeds)
+	// Write it out as JSON.
+	_ = t.WriteJSON(w, http.StatusOK, catBreeds)
 }
 
+// GetAllCatsXML gets a list of all cat breeds from the database and returns it as XML.
 func (app *application) GetAllCatsXML(w http.ResponseWriter, r *http.Request) {
 	var t toolbox.Tools
+
+	// Get all breeds from the database.
 	allBreeds, err := app.App.Models.CatBreed.All()
 	if err != nil {
 		_ = t.ErrorJSON(w, err, http.StatusBadRequest)
@@ -35,9 +38,11 @@ func (app *application) GetAllCatsXML(w http.ResponseWriter, r *http.Request) {
 		Breeds  []*models.CatBreed `xml:"cat-breed"`
 	}
 
+	// Structure the data we want to convert to XML.
 	breeds := catBreeds{
 		Breeds: allBreeds,
 	}
 
+	// Write the XML out.
 	_ = t.WriteXML(w, http.StatusOK, breeds)
 }
