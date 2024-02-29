@@ -59,18 +59,6 @@ func (app *application) GetCatBreedByName(w http.ResponseWriter, r *http.Request
 		_ = t.ErrorJSON(w, err, http.StatusBadRequest)
 		return
 	}
-
-	//// Since we are sending a slice, we need a wrapper, or we will not have a root element.
-	//type catBreed struct {
-	//	XMLName struct{}           `xml:"cat-breed"` // this sets the name of the root element
-	//	Breeds  *models.CatBreed `xml:"cat-breed"`
-	//}
-	//
-	//// Structure the data we want to convert to XML.
-	//breeds := catBreeds{
-	//	Breeds: allBreeds,
-	//}
-
 	// Write the XML out.
 	_ = t.WriteXML(w, http.StatusOK, breed)
 }
