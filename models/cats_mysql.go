@@ -36,6 +36,36 @@ func (m *mysqlRepository) GetCatBreedByID(id int) (*CatBreed, error) {
 	return &cat, nil
 }
 
+func (m *mysqlRepository) GetCatBreedByName(id string) (*CatBreed, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `select id, breed, weight_low_lbs, weight_high_lbs,
+       			cast(((weight_low_lbs + weight_high_lbs) / 2) as unsigned) as average_weight,
+				lifespan, coalesce(details, ''),
+				coalesce(alternate_names, ''), coalesce(geographic_origin, '') 
+				from cat_breeds where breed = ?`
+
+	row := m.DB.QueryRowContext(ctx, query, id)
+	var cat CatBreed
+	err := row.Scan(
+		&cat.ID,
+		&cat.Breed,
+		&cat.WeightLowLbs,
+		&cat.WeightHighLbs,
+		&cat.AverageWeight,
+		&cat.Lifespan,
+		&cat.Details,
+		&cat.AlternateNames,
+		&cat.GeographicOrigin,
+	)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+	return &cat, nil
+}
+
 func (m *mysqlRepository) RandomCatBreed() (*CatBreed, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()

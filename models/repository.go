@@ -11,6 +11,7 @@ type Repository interface {
 	AllCatBreeds() ([]*CatBreed, error)
 	RandomCatBreed() (*CatBreed, error)
 	GetCatBreedByID(id int) (*CatBreed, error)
+	GetCatBreedByName(id string) (*CatBreed, error)
 	//RandomDogOfSize(minWeight, maxWeight int) (*models.DogBreed, error)
 	//RandomCatOfSize(minWeight, maxWeight int) (*models.CatBreed, error)
 }

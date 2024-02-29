@@ -16,3 +16,7 @@ func (m *testRepository) AllCatBreeds() ([]*CatBreed, error) {
 func (m *testRepository) RandomCatOfSize(minWeight, maxWeight int) (*CatBreed, error) {
 	return nil, nil
 }
+
+func (m *testRepository) GetCatBreedByName(id string) (*CatBreed, error) {
+	return nil, nil
+}

@@ -83,6 +83,10 @@ func (c *CatBreed) Get(id int) (*CatBreed, error) {
 	return repo.GetCatBreedByID(id)
 }
 
+func (c *CatBreed) GetBreedByName(name string) (*CatBreed, error) {
+	return repo.GetCatBreedByName(name)
+}
+
 type Dog struct {
 	ID             int       `json:"id"`
 	DogName        int       `json:"dog_name"`
