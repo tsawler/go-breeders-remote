@@ -48,8 +48,8 @@ func (app *application) GetAllCatBreedsXML(w http.ResponseWriter, r *http.Reques
 	_ = t.WriteXML(w, http.StatusOK, breeds)
 }
 
-// GetCatBreedByName gets a cat breed from the database, by name, and returns it as XML.
-func (app *application) GetCatBreedByName(w http.ResponseWriter, r *http.Request) {
+// GetCatBreedByNameXML gets a cat breed from the database, by name, and returns it as XML.
+func (app *application) GetCatBreedByNameXML(w http.ResponseWriter, r *http.Request) {
 	name := chi.URLParam(r, "breed")
 	var t toolbox.Tools
 
@@ -61,4 +61,19 @@ func (app *application) GetCatBreedByName(w http.ResponseWriter, r *http.Request
 	}
 	// Write the XML out.
 	_ = t.WriteXML(w, http.StatusOK, breed)
+}
+
+// GetCatBreedByNameJSON gets a cat breed from the database, by name, and returns it as XML.
+func (app *application) GetCatBreedByNameJSON(w http.ResponseWriter, r *http.Request) {
+	name := chi.URLParam(r, "breed")
+	var t toolbox.Tools
+
+	// Get all breeds from the database.
+	breed, err := app.App.Models.CatBreed.GetBreedByName(name)
+	if err != nil {
+		_ = t.ErrorJSON(w, err, http.StatusBadRequest)
+		return
+	}
+	// Write the XML out.
+	_ = t.WriteJSON(w, http.StatusOK, breed)
 }
